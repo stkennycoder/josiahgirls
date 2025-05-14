@@ -553,6 +553,25 @@
             background-color: #d63384;
         }
         
+        .form-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-message.success {
+            background-color: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            display: block;
+        }
+        
+        .form-message.error {
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            display: block;
+        }
+        
         .copyright {
             text-align: center;
             padding-top: 30px;
@@ -649,12 +668,11 @@
             <div class="logo-container">
                 <img src="logo.jpeg" alt="Josiah Girls Logo" class="logo">
                 <h1 class="school-name">JOSIAH GIRLS SEC SCHOOL</h1>
-                
             </div>
             
             <nav class="desktop-nav">
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="aboutus.html">About Us</a></li>
                     <li><a href="admission.html">Admission</a></li>
                     <li><a href="academics.html">Academics</a></li>
@@ -673,13 +691,13 @@
         
         <div class="mobile-menu" id="mobileMenu">
             <ul>
-                <li><a href="home.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="admission.html">Admission</a></li>
-                    <li><a href="academics.html">Academics</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="schoollife.html">School Life</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="admission.html">Admission</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="schoollife.html">School Life</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
             </ul>
         </div>
     </header>
@@ -793,7 +811,6 @@
                         <li>PCM - Physics, Chemistry, Mathematics</li>
                         <li>PGM - Physics, Geography, Mathematics</li>
                         <li>CBG - Chemistry, Biology, Geography</li>
-                    
                         <li>HGL - History, Geography, Language</li>
                         <li>HKL - History, Kiswahili, Literature</li>
                         <li>HGE - History, Geography, Economics</li>
@@ -925,24 +942,25 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="home.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="admission.html">Admission</a></li>
-                    <li><a href="academics.html">Academics</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="schoollife.html">School Life</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="admission.html">Admission</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="schoollife.html">School Life</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-newsletter">
                     <h3>Stay Updated</h3>
-                    <form class="newsletter-form">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <input type="tel" placeholder="Phone Number">
-                        <textarea placeholder="Your Message"></textarea>
+                    <form id="newsletterForm" class="newsletter-form" action="https://formspree.io/f/xrbqrgrw" method="POST">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="tel" name="phone" placeholder="Phone Number">
+                        <textarea name="message" placeholder="Your Message"></textarea>
                         <button type="submit">Subscribe</button>
+                        <div id="formMessage" class="form-message"></div>
                     </form>
                 </div>
             </div>
@@ -1003,6 +1021,56 @@
                 header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
             } else {
                 header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Form submission handling
+        const newsletterForm = document.getElementById('newsletterForm');
+        const formMessage = document.getElementById('formMessage');
+
+        newsletterForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const submitButton = this.querySelector('button[type="submit"]');
+            
+            // Disable submit button to prevent multiple submissions
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success message
+                    formMessage.textContent = 'Thank you for subscribing! We will contact you soon.';
+                    formMessage.className = 'form-message success';
+                    newsletterForm.reset();
+                } else {
+                    // Error message
+                    formMessage.textContent = 'Oops! There was a problem submitting your form. Please try again.';
+                    formMessage.className = 'form-message error';
+                }
+            } catch (error) {
+                // Network error message
+                formMessage.textContent = 'Network error. Please check your connection and try again.';
+                formMessage.className = 'form-message error';
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Subscribe';
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.className = 'form-message';
+                    formMessage.textContent = '';
+                }, 5000);
             }
         });
     </script>
