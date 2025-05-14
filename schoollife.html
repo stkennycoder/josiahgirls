@@ -513,11 +513,27 @@
         .newsletter-form button {
             align-self: flex-start;
         }
-        
-        .footer-bottom {
+
+        /* Form Success Message */
+        .form-success {
+            display: none;
+            background-color: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Form Error Message */
+        .form-error {
+            display: none;
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
         }
         
         /* Responsive Styles */
@@ -614,7 +630,7 @@
             
             <div class="mobile-menu">
                 <ul class="nav-links">
-                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="aboutus.html">About Us</a></li>
                     <li><a href="admission.html">Admission</a></li>
                     <li><a href="academics.html">Academics</a></li>
@@ -805,11 +821,10 @@
                     <h3>About Josiah Girls</h3>
                     <p>Josiah Girls Secondary School is a premier institution dedicated to empowering young women through excellence in education. We cultivate intellectual curiosity, moral integrity, and leadership skills to prepare our students for success in an interconnected world.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://www.facebook.com/josiahgirlshighschool/" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/josiah_girls_high_school/" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/josiah_girls_high_school/" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/watch?v=Dn47eHtz6ks" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
@@ -828,7 +843,7 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="home.html">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                     <li><a href="aboutus.html">About Us</a></li>
                     <li><a href="admission.html">Admission</a></li>
                     <li><a href="academics.html">Academics</a></li>
@@ -840,13 +855,19 @@
                 
                 <div class="newsletter">
                     <h3>Subscribe to Newsletter</h3>
-                    <p>Stay updated with our latest news and events. Subscribe to our newsletter.</p>
-                    <form class="newsletter-form">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="tel" placeholder="Phone Number">
-                        <input type="email" placeholder="Your Email" required>
-                        <textarea placeholder="Your Message" rows="3"></textarea>
-                        <button type="submit" class="btn">Subscribe</button>
+                    <p>Stay updated with our latest news and events. Subscribe to our newsletter or send us a message.</p>
+                    <form id="newsletterForm" action="https://formspree.io/f/xrbqrgrw" method="POST" class="newsletter-form">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="tel" name="phone" placeholder="Phone Number" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <textarea name="message" placeholder="Your Message" rows="3"></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                        <div id="formSuccess" class="form-success">
+                            Thank you for your message! We'll get back to you soon.
+                        </div>
+                        <div id="formError" class="form-error">
+                            There was an error submitting your message. Please try again.
+                        </div>
                     </form>
                 </div>
             </div>
@@ -914,6 +935,42 @@
                     header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
                 }
             });
+
+            // Form submission handling
+            const newsletterForm = document.getElementById('newsletterForm');
+            const formSuccess = document.getElementById('formSuccess');
+            const formError = document.getElementById('formError');
+
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Hide previous messages
+                    formSuccess.style.display = 'none';
+                    formError.style.display = 'none';
+                    
+                    try {
+                        const formData = new FormData(this);
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            formSuccess.style.display = 'block';
+                            newsletterForm.reset();
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        formError.style.display = 'block';
+                    }
+                });
+            }
         });
     </script>
 </body>
