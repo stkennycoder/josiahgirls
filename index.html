@@ -462,7 +462,9 @@
         }
         
         .contact-form input,
-        .contact-form textarea {
+        .contact-form textarea,
+        .newsletter-form input,
+        .newsletter-form textarea {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -472,14 +474,37 @@
         }
         
         .contact-form input:focus,
-        .contact-form textarea:focus {
+        .contact-form textarea:focus,
+        .newsletter-form input:focus,
+        .newsletter-form textarea:focus {
             border-color: var(--primary-color);
             outline: none;
         }
         
-        .contact-form textarea {
+        .contact-form textarea,
+        .newsletter-form textarea {
             resize: vertical;
             min-height: 150px;
+        }
+        
+        /* Form Status Messages */
+        .form-status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .form-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        
+        .form-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
         }
         
         .map-container {
@@ -546,15 +571,6 @@
         
         .newsletter-form .form-group {
             margin-bottom: 15px;
-        }
-        
-        .newsletter-form input,
-        .newsletter-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
         }
         
         .social-links {
@@ -725,7 +741,7 @@
                     <li><a href="news.html">News</a></li>
                     <li><a href="schoollife.html">School Life</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
- </ul>
+                </ul>
             </div>
             
             <div class="overlay" id="overlay"></div>
@@ -936,7 +952,9 @@
                 </div>
                 
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/xrbqrgrw" method="POST">
+                        <div id="formStatus" class="form-status"></div>
+                        
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" name="name" required>
@@ -1012,18 +1030,20 @@
                 <div class="footer-newsletter">
                     <h3>Newsletter</h3>
                     <p>Stay updated with our school news, events, and important announcements by subscribing to our newsletter.</p>
-                    <form class="newsletter-form">
+                    <form id="newsletterForm" action="https://formspree.io/f/xrbqrgrw" method="POST" class="newsletter-form">
+                        <div id="newsletterStatus" class="form-status"></div>
+                        
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" placeholder="Phone Number" required>
+                            <input type="tel" name="phone" placeholder="Phone Number" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Your Message"></textarea>
+                            <textarea name="message" placeholder="Your Message"></textarea>
                         </div>
                         <button type="submit" class="btn">Subscribe</button>
                     </form>
@@ -1087,16 +1107,67 @@
             });
         });
         
-        // Form submission handling
+        // Contact Form Submission
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
+            contactForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
-                // Here you would typically send the form data to a server
-                // For demonstration, we'll just show an alert
-                alert('Thank you for your message! We will contact you soon.');
-                this.reset();
+                const formData = new FormData(this);
+                const formStatus = document.getElementById('formStatus');
+                
+                try {
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        formStatus.textContent = 'Thank you for your message! We will contact you soon.';
+                        formStatus.className = 'form-status success';
+                        this.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    formStatus.textContent = 'Oops! There was a problem submitting your form. Please try again later.';
+                    formStatus.className = 'form-status error';
+                }
+            });
+        }
+        
+        // Newsletter Form Submission
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const newsletterStatus = document.getElementById('newsletterStatus');
+                
+                try {
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        newsletterStatus.textContent = 'Thank you for subscribing to our newsletter!';
+                        newsletterStatus.className = 'form-status success';
+                        this.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    newsletterStatus.textContent = 'Oops! There was a problem with your subscription. Please try again later.';
+                    newsletterStatus.className = 'form-status error';
+                }
             });
         }
         
