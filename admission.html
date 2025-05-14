@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah Girls Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #e83e8c;
+            --secondary-color: #6c757d;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --white: #ffffff;
+            --accent-color: #ff69b4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            line-height: 1.7;
+            color: #333;
+            overflow-x: hidden;
+            background-color: #fef6f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(232, 62, 140, 0.3);
+        }
+        
+        .btn:hover {
+            background: #d63384;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(232, 62, 140, 0.4);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .school-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: var(--dark-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            z-index: 1001;
+        }
+        
+        .hamburger-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            right: -100%;
+            width: 300px;
+            height: calc(100vh - 90px);
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.4s ease;
+            z-index: 999;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu ul {
+            list-style: none;
+        }
+        
+        .mobile-menu li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-menu a {
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 90px;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* Admissions Process Section */
+        .admission-process {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .process-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .process-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .process-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+        
+        .process-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .process-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .highlight-box {
+            background-color: var(--light-color);
+            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 0 8px 8px 0;
+            position: relative;
+        }
+        
+        .highlight-box::before {
+            content: '\201C';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 60px;
+            color: rgba(232, 62, 140, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .highlight-box p {
+            font-size: 1.1rem;
+            color: #555;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Combinations Section */
+        .combinations {
+            padding: 100px 0;
+            background-color: var(--light-color);
+        }
+        
+        .combination-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .combination-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        .combination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .combination-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .combination-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .combination-card ul {
+            list-style: none;
+        }
+        
+        .combination-card li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .combination-card li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .contact-info, .admission-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--light-color);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info h3, .admission-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-info h3::after, .admission-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.3rem;
+            margin-top: 5px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .contact-text p {
+            margin-bottom: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #1a1a1a);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-about h3, .footer-programs h3, .footer-links h3, .footer-newsletter h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-about h3::after, .footer-programs h3::after, .footer-links h3::after, .footer-newsletter h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 25px;
+            color: #ddd;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-programs ul, .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-programs li, .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-programs a, .footer-links a {
+            color: #bbb;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+        
+        .footer-programs a:hover, .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .newsletter-form input, .newsletter-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form input::placeholder, .newsletter-form textarea::placeholder {
+            color: #ccc;
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #d63384;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .school-name {
+                font-size: 1.3rem;
+            }
+            
+            .logo {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .process-container, .contact-container {
+                flex-direction: column;
+            }
+            
+            .process-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 85vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .combination-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <img src="D:\josiah\logo.jpeg" alt="Josiah Girls Logo" class="logo">
+                <h1 class="school-name">JOSIAH GIRLS SEC SCHOOL</h1>
+                
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </nav>
+            
+            <div class="hamburger-menu" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>My Dream, My Destiny</h1>
+            <p>At Josiah Girls Secondary School, we cultivate brilliance, confidence, and leadership in young women. Our holistic education empowers students to excel academically while developing the skills and character needed to shape their futures and transform society.</p>
+            <a href="#admission" class="btn">Begin Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Admission Process Section -->
+    <section class="admission-process" id="admission">
+        <div class="container">
+            <h2 class="section-title">Admission Process</h2>
+            
+            <!-- Form Five Admission -->
+            <div class="process-container">
+                <div class="process-content">
+                    <h3>Form Five Admission</h3>
+                    <p>We are delighted to announce admissions for Form Five students for the 2025/2026 academic year. At Josiah Girls, we provide an exceptional learning environment where young women thrive in their advanced level studies.</p>
+                    
+                    <p>Prospective students must have completed Form Four national examinations (CSEE) with a minimum of C credit in all subjects relevant to their desired combination. We are currently accepting applications, and parents are encouraged to enroll their daughters for this transformative phase of their education.</p>
+                    
+                    <div class="highlight-box">
+                        <p>Our comprehensive admission process includes both written assessments and oral interviews. This allows us to understand each student's unique strengths and learning needs, ensuring we can provide the personalized support necessary for academic excellence in advanced level studies.</p>
+                    </div>
+                    
+                    <p>At Josiah Girls, we don't just educate - we inspire, challenge, and prepare young women for leadership. Our advanced level program combines rigorous academics with character development, creating well-rounded graduates ready to make their mark on the world.</p>
+                </div>
+                
+                <div class="process-image">
+                    <img src="D:\josiah\form5.jpeg" alt="Form Five Students">
+                </div>
+            </div>
+            
+            <!-- Form Six Admission -->
+            <div class="process-container" style="flex-direction: row-reverse;">
+                <div class="process-content">
+                    <h3>Form Six Enrollment</h3>
+                    <p>For students progressing to Form Six, enrollment begins six months prior to national examinations. This strategic timing ensures continuity in learning and allows students to build on the strong foundation established in Form Five.</p>
+                    
+                    <p>Students continue with their chosen combinations from Form Five, benefiting from our specialized teaching methodologies tailored for A-Level success. Our program includes intensive revision sessions, mock examinations, and personalized feedback to maximize performance.</p>
+                    
+                    <div class="highlight-box">
+                        <p>Each Form Six candidate undergoes a comprehensive evaluation including written tests and oral interviews. This thorough assessment helps us identify specific areas for improvement, allowing us to provide targeted support that ensures every student is fully prepared to excel in their national examinations.</p>
+                    </div>
+                    
+                    <p>Our Form Six program goes beyond exam preparation - we develop critical thinkers, problem solvers, and future leaders. With small class sizes and dedicated faculty, we provide the individual attention that makes the difference between good and exceptional results.</p>
+                </div>
+                
+                <div class="process-image">
+                    <img src="D:\josiah\form6.jpeg" alt="Form Six Students">
+                </div>
+            </div>
+            
+            <!-- Form One & Three Admission -->
+            <div class="process-container">
+                <div class="process-content">
+                    <h3>Form One & Form Three Enrollment</h3>
+                    <p>Josiah Girls Secondary School warmly welcomes new students to our Form One and Form Three classes. For Form One students beginning their secondary education in 2026, we offer a nurturing environment that makes the transition to high school both exciting and rewarding.</p>
+                    
+                    <p>Our Form Three program provides the perfect opportunity for students to join our community as they prepare for their critical examination years. We offer comprehensive academic support and extracurricular activities to ensure well-rounded development.</p>
+                    
+                    <div class="highlight-box">
+                        <p>We are committed to delivering excellence in education, combining academic rigor with character development. Our holistic approach ensures students grow intellectually, socially, and emotionally during these formative years of their education.</p>
+                    </div>
+                    
+                    <p>All prospective students participate in our assessment process designed to understand each girl's unique potential. This allows us to provide the personalized support that helps every student thrive academically and personally throughout their educational journey with us.</p>
+                </div>
+                
+                <div class="process-image">
+                    <img src="D:\josiah\form3.jpeg" alt="Form Three Students">
+                </div>
+            </div>
+            
+            <!-- Form Two & Four Admission -->
+            <div class="process-container" style="flex-direction: row-reverse;">
+                <div class="process-content">
+                    <h3>Form Two & Form Four Admission</h3>
+                    <p>For students seeking to join our Form Two and Form Four classes, we recommend enrollment before March to ensure adequate time to integrate with classmates and fully prepare for examinations.</p>
+                    
+                    <p>Our Form Two program builds on foundational knowledge while introducing more complex concepts, preparing students for upper secondary challenges. Form Four students benefit from our intensive examination preparation program, including revision sessions, study skills workshops, and mock examinations.</p>
+                    
+                    <div class="highlight-box">
+                        <p>The admission process includes assessments designed to evaluate each student's academic level and identify areas where additional support may be needed. This ensures we can provide the right resources to help every girl achieve her full potential.</p>
+                    </div>
+                    
+                    <p>At Josiah Girls, we believe every student deserves the opportunity to excel. Our supportive environment, experienced teachers, and comprehensive resources create the perfect conditions for academic achievement and personal growth at every level.</p>
+                </div>
+                
+                <div class="process-image">
+                    <img src="D:\josiah\form4.jpeg" alt="Form Four Students">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combinations Section -->
+    <section class="combinations" id="combinations">
+        <div class="container">
+            <h2 class="section-title">Our Academic Programs</h2>
+            
+            <div class="combination-container">
+                <div class="combination-card">
+                    <h3>Advanced Level Combinations</h3>
+                    <ul>
+                        <li>PCB - Physics, Chemistry, Biology</li>
+                        <li>PCM - Physics, Chemistry, Mathematics</li>
+                        <li>PGM - Physics, Geography, Mathematics</li>
+                        <li>CBG - Chemistry, Biology, Geography</li>
+                    
+                        <li>HGL - History, Geography, Language</li>
+                        <li>HKL - History, Kiswahili, Literature</li>
+                        <li>HGE - History, Geography, Economics</li>
+                        <li>ECA - Economics, Commerce, Accountancy</li>
+                        <li>EAG - Economics, Accountancy, Geography</li>
+                    </ul>
+                </div>
+                
+                <div class="combination-card">
+                    <h3>Ordinary Level Subjects</h3>
+                    <ul>
+                        <li>Mathematics</li>
+                        <li>English Language</li>
+                        <li>Kiswahili</li>
+                        <li>Physics</li>
+                        <li>Chemistry</li>
+                        <li>Biology</li>
+                        <li>Geography</li>
+                        <li>History</li>
+                        <li>Civics</li>
+                        <li>Commerce</li>
+                        <li>Book Keeping</li>
+                        <li>Bible Knowledge</li>
+                        <li>Literature in English</li>
+                    </ul>
+                </div>
+                
+                <div class="combination-card">
+                    <h3>Extracurricular Programs</h3>
+                    <ul>
+                        <li>Leadership Training</li>
+                        <li>Debate & Public Speaking</li>
+                        <li>Science Club</li>
+                        <li>Mathematics Olympiad</li>
+                        <li>ICT & Coding</li>
+                        <li>Music & Performing Arts</li>
+                        <li>Sports & Athletics</li>
+                        <li>Community Service</li>
+                        <li>Entrepreneurship Club</li>
+                        <li>Environmental Club</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p>+255 753 739 321</p>
+                            <p>+255 614 569 321</p>
+                            <p>+255 756 083 379</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p>josiahgirlshighschool@yahooh.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p>P.O. Box 1605</p>
+                            <p>Bukoba, Kagera</p>
+                            <p>Tanzania</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="admission-info">
+                    <h3>Admission Details</h3>
+                    <p>We welcome applications from motivated young women committed to academic excellence and personal growth. Our admission process identifies students who will thrive in our nurturing yet challenging environment.</p>
+                    
+                    <p>For information about requirements, deadlines, and fees, please contact our administration office using the details provided. Our team is ready to guide you through every step of the admission process.</p>
+                    
+                    <a href="admission.html" class="btn" style="margin-top: 20px; display: inline-block;">Download Application Form</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <h3>About Josiah Girls</h3>
+                    <p>Josiah Girls Secondary School is a premier institution dedicated to empowering young women through excellence in education. Founded on principles of academic rigor, character development, and leadership training, we prepare students to excel in higher education and become transformative leaders in their communities.</p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-programs">
+                    <h3>Academic Programs</h3>
+                    <ul>
+                        <li><a href="admission.html">Form One</a></li>
+                        <li><a href="admission.html">Form Two</a></li>
+                        <li><a href="admission.html">Form Three</a></li>
+                        <li><a href="admission.html">Form Four</a></li>
+                        <li><a href="admission.html">Form Five</a></li>
+                        <li><a href="admission.html">Form Six</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3>Stay Updated</h3>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <textarea placeholder="Your Message"></textarea>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Josiah Girls Secondary School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburgerMenu = document.getElementById('hamburgerMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburgerMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking anywhere on the screen
+        document.addEventListener('click', function() {
+            hamburgerMenu.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Prevent mobile menu from closing when clicking inside it
+        mobileMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Header shadow on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

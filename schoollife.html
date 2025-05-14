@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah Girls Secondary School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #e83f8e;
+            --secondary-color: #2c3e50;
+            --accent-color: #f8bbd0;
+            --text-color: #333;
+            --light-color: #fff;
+            --dark-color: #222;
+            --section-padding: 80px 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--light-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background: #c2185b;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--light-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            color: var(--primary-color);
+        }
+        
+        /* Navigation Styles */
+        .nav-links {
+            display: flex;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu Styles */
+        .hamburger-menu, .mobile-kebab-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .hamburger-menu span, .mobile-kebab-menu span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--light-color);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 80px 30px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu .nav-links {
+            flex-direction: column;
+        }
+        
+        .mobile-menu .nav-links li {
+            margin: 15px 0;
+        }
+        
+        .mobile-menu .nav-links a {
+            font-size: 18px;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: var(--light-color);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* Sections */
+        section {
+            padding: var(--section-padding);
+        }
+        
+        .section-light {
+            background-color: #f9f9f9;
+        }
+        
+        .section-dark {
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+        }
+        
+        .section-dark .section-title {
+            color: var(--light-color);
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+        
+        .section-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .gallery-item {
+            flex: 1 1 300px;
+            max-width: 350px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .contact-info, .admission-info {
+            flex: 1 1 400px;
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info h3, .admission-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .contact-info h3::after, .admission-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .contact-details {
+            margin-bottom: 20px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: var(--light-color);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-about h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--light-color);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .newsletter h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .newsletter h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        .newsletter p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .newsletter-form input,
+        .newsletter-form textarea {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-color);
+            font-size: 16px;
+        }
+        
+        .newsletter-form input::placeholder,
+        .newsletter-form textarea::placeholder {
+            color: #ccc;
+        }
+        
+        .newsletter-form button {
+            align-self: flex-start;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-content p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .mobile-menu {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <img src="D:\josiah\logo.jpeg" alt="Josiah Girls Secondary School Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>JOSIAH GIRLS <span>SEC SCHOOL</span></h1>
+                </div>
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </nav>
+            
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="overlay"></div>
+            
+            <div class="mobile-menu">
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>My Dream My Destiny</h1>
+            <p>At Josiah Girls Secondary School, we empower young women to dream boldly and achieve greatly. Our nurturing environment fosters academic excellence, personal growth, and leadership skills that will shape your daughter's future. Here, every girl discovers her potential and builds the foundation for a brilliant tomorrow.</p>
+            <a href="#contact" class="btn">Join Us Today</a>
+        </div>
+    </section>
+
+    <!-- Unity in Variety Section -->
+    <section class="section-light" id="unity">
+        <div class="container">
+            <h2 class="section-title">Unity in Variety</h2>
+            <div class="section-content">
+                <p>At Josiah Girls Secondary School, we cherish the richness of <span class="highlight">variety</span> with open hearts and unwavering pride. Here, students of every background, belief, and heritage are not only accepted—they are honored, forming a dynamic tapestry of traditions, perspectives, and aspirations. Under the guidance of the esteemed Medical and Educational Foundation, we foster <span class="highlight">inclusiveness</span>, providing an exceptional education to bright young minds from all corners of society.</p>
+                <p>Our classrooms buzz with the expertise and dedication of Tanzania's most outstanding educators—passionate, innovative, and deeply devoted to nurturing excellence. Hailing from diverse regions, they bring wisdom, kindness, and motivation, transforming eager students into forward-thinking leaders. Together, we build a future where <span class="highlight">differences flourish</span>, talents rise, and global awareness shines—cultivating well-rounded, patriotic, and empowered young women.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="D:\josiah\tt.jpeg" alt="Diverse students learning together">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\staff.jpeg" alt="Teacher helping students">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Healthy Meals and Cleanliness Section -->
+    <section id="meals">
+        <div class="container">
+            <h2 class="section-title">Healthy Meals and Cleanliness</h2>
+            <div class="section-content">
+                <p>At Josiah Girls Secondary School, we hold that <span class="highlight">a thriving body is the cornerstone of a sharp intellect</span>. Delighting young minds begins with nourishing meals—thoughtfully prepared to energize, invigorate, and uplift. Our boarding students enjoy wholesome, balanced dishes that blend flavor and vitality, because true excellence starts with mindful nourishment.</p>
+                <p>Yet our commitment runs deeper. Your safety and comfort are our highest priority. Our pristine, fully stocked wellness centers are staffed by attentive medical professionals, offering prompt and caring support whenever needed. From immediate care to nurturing guidance, we ensure every student flourishes in an environment of strength and well-being.</p>
+                <p>Here, <span class="highlight">cleanliness is grace, nourishment is strength, and wellness is a way of life</span>. Because at Josiah, we don't just teach—we cultivate confident, unstoppable young women.</p>
+                <p>Inspiring, refined, and deeply attentive—because your child's wellness is our finest craft.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="D:\josiah\unity.jpeg" alt="Healthy school meals">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\wellness.jpeg" alt="Clean school facilities">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beyond the Classroom Section -->
+    <section class="section-light" id="beyond">
+        <div class="container">
+            <h2 class="section-title">Beyond the Classroom</h2>
+            <div class="section-content">
+                <p>At Josiah Girls Secondary School, education bursts past traditional boundaries into a realm of exhilarating discovery. We cultivate a dynamic space where passion meets purpose, and every student's path is illuminated by creativity, camaraderie, and boundless exploration.</p>
+                <p>Our verdant sports grounds—soccer fields, basketball arenas, volleyball courts, and sprint-ready tracks—are more than mere facilities; they're platforms where resilience, unity, and determination come alive. Here, physical prowess isn't just nurtured—it's honored as the pulse of a vibrant, unstoppable generation.</p>
+                <p>Yet the wonder extends further. Step into our lively student societies, where dormant gifts awaken and lifelong bonds form. Whether through the arts, STEM, or leadership, every pursuit finds its home. And for those chasing excellence, we pave the way to thrilling regional and international contests—because at Josiah, limits are made to be transcended.</p>
+                <p>This is where learning captivates, energizes, and reshapes futures. Welcome to a world where every opportunity sparks brilliance—and every day is a canvas for greatness.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="D:\josiah\sport.jpeg" alt="Students playing sports">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\photo.jpeg" alt="Science club activity">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\st.jpeg" alt="Students in library">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Tours Section -->
+    <section id="tours">
+        <div class="container">
+            <h2 class="section-title">School Tours</h2>
+            <div class="section-content">
+                <p>At Josiah Girls Secondary School, we transform the globe into a living lesson through immersive student journeys! Our thoughtfully designed excursions combine exhilarating discovery with meaningful education, guiding young minds across Tanzania's rich landscapes and to extraordinary destinations worldwide. Picture your daughter unlocking the secrets of history, standing in awe of nature's marvels, and bonding with fellow scholars across continents—all while collecting wisdom no textbook could contain.</p>
+                <p>These are far more than mere visits; they are catalysts for wonder, stretching perspectives and nurturing the roots of worldly awareness. Like the most powerful narratives, our adventures don't just inform—they reshape, gifting students with enduring memories and an unquenchable thirst for knowledge.</p>
+                <p>Because at Josiah, we know the most profound learning doesn't just unfold at desks—it blossoms when eager hearts step into the breathtaking, ever-unfolding story of our world.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="D:\josiah\tour.jpeg" alt="Students on educational tour">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\form3.jpeg" alt="Cultural exchange program">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\pic3.jfif"alt="Students exploring nature">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boarding Life Section -->
+    <section class="section-light" id="boarding">
+        <div class="container">
+            <h2 class="section-title">Boarding Life</h2>
+            <div class="section-content">
+                <p>At Josiah Girls Secondary School, our residential program weaves together comfort, wellbeing, and scholarly achievement into a nurturing second home. Students reside in airy, sun-drenched dormitories featuring plush bedding, welcoming communal spaces for unwinding, and immaculate washrooms – all crafted to create a sanctuary that's both secure and revitalizing.</p>
+                <p>What truly distinguishes us is the devoted attention of our residential team, who offer constant support with a familial warmth. More than caretakers, they become trusted confidantes – offering encouragement, wisdom, and inspiration to ensure each young woman feels seen, uplifted, and empowered to succeed. Our educators further enrich this environment, blending thoughtful guidance with academic rigor to transform living spaces into hubs of productivity and personal growth.</p>
+                <p>This is more than accommodation – it's a transformative journey where lasting friendships form, independence blossoms, and potential is unlocked. Within our structured yet affectionate community, students don't merely reside – they flourish. Because at Josiah, we understand that when young minds feel cherished and secure, extraordinary achievement naturally follows.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="D:\josiah\bbb.jpeg" alt="Comfortable dormitory">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\art.jpeg" alt="Students in common room">
+                </div>
+                <div class="gallery-item">
+                    <img src="D:\josiah\sport.jpeg" alt="Study session in dorm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="section-dark">
+        <div class="container">
+            <h2 class="section-title">Why Choose Josiah Girls?</h2>
+            <div class="section-content">
+                <p>Josiah Girls Secondary School isn't just an institution—it's a transformative experience that shapes character, intellect, and destiny. We offer more than education; we provide a holistic journey that prepares young women for leadership in an ever-changing world.</p>
+                <p>Our unique blend of academic rigor, character development, and extracurricular excellence creates an environment where students don't just learn—they thrive. With state-of-the-art facilities, a nurturing boarding environment, and a commitment to each girl's personal growth, we stand as a beacon of excellence in girls' education.</p>
+                <p>When you choose Josiah, you're choosing:</p>
+                <ul style="text-align: left; max-width: 600px; margin: 0 auto 20px;">
+                    <li>• A legacy of academic excellence with proven results</li>
+                    <li>• A safe, supportive environment that feels like home</li>
+                    <li>• Opportunities for leadership and personal development</li>
+                    <li>• Exposure to global perspectives through our exchange programs</li>
+                    <li>• A network of accomplished alumnae and mentors</li>
+                    <li>• The foundation for a successful, fulfilling future</li>
+                </ul>
+                <p>Join us at Josiah Girls Secondary School, where we don't just educate girls—we empower the women who will shape tomorrow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-phone"></i> +255 753 739 321</p>
+                        <p><i class="fas fa-phone"></i> +255 614 569 321</p>
+                        <p><i class="fas fa-phone"></i> +255 756 083 379</p>
+                        <p><i class="fas fa-envelope"></i> josiahgirlshighschool@yahooh.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> P.O. Box 1605, Bukoba, Kagera, Tanzania</p>
+                    </div>
+                </div>
+                
+                <div class="admission-info">
+                    <h3>Admission Process</h3>
+                    <p>We welcome applications from motivated young women who are committed to academic excellence and personal growth. Our admission process is designed to identify students who will thrive in our nurturing yet challenging environment.</p>
+                    <p>For more information about admission requirements, application deadlines, and fees, please contact our administration office using the details provided.</p>
+                    <a href="admission.html" class="btn" style="margin-top: 15px;">Download Application Form</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <h3>About Josiah Girls</h3>
+                    <p>Josiah Girls Secondary School is a premier institution dedicated to empowering young women through excellence in education. We cultivate intellectual curiosity, moral integrity, and leadership skills to prepare our students for success in an interconnected world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="admission.html">Form One</a></li>
+                        <li><a href="admission.html">Form Two</a></li>
+                        <li><a href="admission.html">Form Three</a></li>
+                        <li><a href="admission.html">Form Four</a></li>
+                        <li><a href="admission.html">Form Five</a></li>
+                        <li><a href="admission.html">Form Six</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="newsletter">
+                    <h3>Subscribe to Newsletter</h3>
+                    <p>Stay updated with our latest news and events. Subscribe to our newsletter.</p>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" rows="3"></textarea>
+                        <button type="submit" class="btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Josiah Girls Secondary School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-menu .nav-links a');
+            
+            // Toggle mobile menu
+            hamburgerMenu.addEventListener('click', function() {
+                this.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking overlay
+            overlay.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                this.classList.remove('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburgerMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add shadow to header on scroll
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

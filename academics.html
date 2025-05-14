@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah Girls Secondary School - Academics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #e83e8c;
+            --secondary-color: #000000;
+            --accent-color: #ffffff;
+            --text-color: #333333;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--accent-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+        
+        /* Navigation */
+        .desktop-nav {
+            display: flex;
+        }
+        
+        .desktop-nav a {
+            margin-left: 20px;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .desktop-nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .kebab-menu {
+            display: none;
+            position: relative;
+        }
+        
+        .kebab-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+        }
+        
+        .kebab-menu-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: var(--accent-color);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        
+        .kebab-menu-content a {
+            color: var(--secondary-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .kebab-menu-content a:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--accent-color);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 20px;
+            transform: translateY(-150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+        
+        .mobile-nav a {
+            display: block;
+            padding: 10px 0;
+            color: var(--secondary-color);
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--accent-color);
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 60px 0;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 25%;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+        
+        /* Results Tables */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-table th, .results-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .results-table th {
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .results-table tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        
+        .results-table tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .view-results {
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .view-results:hover {
+            color: #c2185b;
+            text-decoration: underline;
+        }
+        
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            flex: 0 0 calc(25% - 20px);
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--light-gray);
+            padding: 60px 0;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info, .admission-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3, .admission-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+        }
+        
+        .admission-info p {
+            margin-bottom: 20px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-about h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-links h3, .quick-links h3, .newsletter h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links ul, .quick-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li, .quick-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a, .quick-links a {
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover, .quick-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .newsletter-form input, .newsletter-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .newsletter-form input::placeholder, .newsletter-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #c2185b;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .feature {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn, .kebab-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature {
+                flex: 0 0 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .results-table th, .results-table td {
+                padding: 10px 5px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="D:\josiah\logo.jpeg" alt="Josiah Girls Secondary School Logo">
+                <div class="logo-text">
+                    <h1>Josiah Girls</h1>
+                    <p>My Dream My Destiny</p>
+                </div>
+            </div>
+            
+            <nav class="desktop-nav">
+                <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+            </nav>
+            
+            <div class="kebab-menu">
+                <button class="kebab-menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+                <div class="kebab-menu-content">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <nav class="mobile-nav">
+            <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>My Dream, My Destiny</h1>
+            <p>At Josiah Girls Secondary School, we empower young women to achieve academic excellence and become leaders of tomorrow. Our commitment to quality education transforms dreams into reality.</p>
+            <a href="#" class="btn">Learn More</a>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Academic Excellence Section -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Academic Excellence Is Our Priority</h2>
+                    <p>Our students consistently demonstrate outstanding performance in national examinations, reflecting our dedication to academic rigor and holistic development.</p>
+                </div>
+                
+                <p>At Josiah Girls Secondary School, we cultivate an environment where intellectual curiosity thrives. Our students' remarkable achievements in national examinations stand as testament to our unwavering commitment to educational excellence. Through innovative teaching methods, personalized attention, and a supportive learning community, we ensure every student reaches her full potential.</p>
+            </section>
+            
+            <!-- Form Six Results -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Advanced Level Examination Results</h2>
+                    <p>Our Form Six students consistently achieve outstanding results in the ACSEE examinations, with many qualifying for prestigious universities worldwide.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Division</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                                <th>View Results</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Division I</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division II</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division III</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division IV</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division 0</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Celebrating Consistent A-Level Achievements</h2>
+                    <p>Our Form Six program is designed to prepare students not just for examinations, but for university success and beyond.</p>
+                </div>
+                
+                <p>Year after year, our Advanced Level students surpass national averages, with many achieving Division I and II results that open doors to prestigious universities. This consistent performance reflects our comprehensive approach to A-Level education, combining rigorous academics with critical thinking development and leadership training.</p>
+            </section>
+            
+            <!-- Form Four Results -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Ordinary Level Examination Results</h2>
+                    <p>Our Form Four students achieve exceptional results in the CSEE examinations, laying a strong foundation for advanced studies.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Division</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                                <th>View Results</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Division I</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division II</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division III</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division IV</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division 0</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Our Commitment to O-Level Success</h2>
+                    <p>We ensure every Form Four student leaves our school with qualifications that open doors to bright futures.</p>
+                </div>
+                
+                <p>At Josiah Girls, we take pride in our 100% pass rate for Form Four students, with the majority achieving Division I and II results. Our comprehensive O-Level program combines academic excellence with practical skills development, ensuring our graduates are well-prepared for either Advanced Level studies or vocational training. Our dedicated teachers work tirelessly to provide personalized support, ensuring each student achieves her personal best.</p>
+            </section>
+            
+            <!-- Form Two Results -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Form Two National Assessment Results</h2>
+                    <p>Our Form Two students demonstrate strong foundational knowledge in the FTNA examinations.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Division</th>
+                                <th>2024</th>
+                                <th>2023</th>
+                                <th>2022</th>
+                                <th>View Results</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Division I</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division II</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division III</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division IV</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                            <tr>
+                                <td>Division 0</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td>10</td>
+                                <td><a href="https://matokeo.necta.go.tz/results/2024/ftna/FTNA2024/S5555.htm" class="view-results" target="_blank">View Results</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Building Strong Foundations</h2>
+                    <p>Our Form Two program ensures students develop the skills and knowledge needed for academic success.</p>
+                </div>
+                
+                <p>The outstanding performance of our Form Two students in national assessments demonstrates the effectiveness of our junior secondary program. We focus on building strong foundations in core subjects while fostering critical thinking and problem-solving skills. Our approach ensures students are well-prepared for the challenges of O-Level studies and beyond.</p>
+            </section>
+            
+            <!-- Why We Deliver the Best -->
+            <section class="section">
+                <div class="section-header">
+                    <h2>Why Josiah Girls Delivers Excellence</h2>
+                    <p>Our comprehensive approach to education ensures every student receives the support and opportunities she needs to succeed.</p>
+                </div>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Competent Teachers</h3>
+                        <p>Our highly qualified and experienced teaching staff are passionate about education and dedicated to student success. They employ innovative teaching methods tailored to girls' learning styles.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-school"></i>
+                        <h3>Modern Facilities</h3>
+                        <p>Our state-of-the-art campus features well-equipped laboratories, a resource-rich library, and technology-enhanced classrooms that create an optimal learning environment.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <h3>Holistic Development</h3>
+                        <p>We nurture not just academic excellence but also character development, leadership skills, and emotional intelligence through our comprehensive co-curricular programs.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h3>Strong Leadership</h3>
+                        <p>Our visionary school leadership provides clear direction and maintains high standards, creating a culture of excellence that permeates every aspect of school life.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h3>Get In Touch</h3>
+                <div class="contact-details">
+                    <p><i class="fas fa-phone"></i> +255 753 739 321</p>
+                    <p><i class="fas fa-phone"></i> +255 614 569 321</p>
+                    <p><i class="fas fa-phone"></i> +255 756 083 379</p>
+                    <p><i class="fas fa-envelope"></i> josiahgirlshighschool@yahooh.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O. Box 1605, Bukoba, Kagera, Tanzania</p>
+                </div>
+            </div>
+            
+            <div class="admission-info">
+                <h3>Admission Process</h3>
+                <p>We welcome applications from motivated young women who are committed to academic excellence and personal growth. Our admission process is designed to identify students who will thrive in our nurturing yet challenging environment.</p>
+                <p>For more information about admission requirements, application deadlines, and fees, please contact our administration office using the details provided.</p>
+                <a href="#" class="btn download-btn">Download Application Form</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <h3>About Josiah Girls</h3>
+                    <p>Josiah Girls Secondary School is a premier institution dedicated to empowering young women through quality education. We foster academic excellence, leadership, and character development in a supportive environment that prepares students for success in university and beyond.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="admission.html">Form One</a></li>
+                        <li><a href="admission.html">Form Two</a></li>
+                        <li><a href="admission.html">Form Three</a></li>
+                        <li><a href="admission.html">Form Four</a></li>
+                        <li><a href="admission.html">Form Five</a></li>
+                        <li><a href="admission.html">Form Six</a></li>
+                    </ul>
+                </div>
+                
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter to receive updates on school news and events.</p>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message"></textarea>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Josiah Girls Secondary School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const kebabMenuBtn = document.querySelector('.kebab-menu-btn');
+        const kebabMenuContent = document.querySelector('.kebab-menu-content');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+        });
+        
+        kebabMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            kebabMenuContent.style.display = kebabMenuContent.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Close menus when clicking anywhere
+        document.addEventListener('click', (e) => {
+            if (mobileNav.classList.contains('active') {
+                mobileNav.classList.remove('active');
+            }
+            
+            if (kebabMenuContent.style.display === 'block' && !e.target.closest('.kebab-menu')) {
+                kebabMenuContent.style.display = 'none';
+            }
+        });
+        
+        // Prevent closing when clicking inside the menu
+        mobileNav.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        kebabMenuContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileNav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josiah Girl's Secondary School - Excellence in Girls' Education</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #e83e8c;
+            --secondary-color: #6c757d;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --white: #ffffff;
+            --black: #000000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            background-color: #d62a7a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(232, 62, 140, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 50%;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            font-weight: 400;
+        }
+        
+        /* Navigation Styles */
+        .nav-links {
+            display: flex;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1002;
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            padding: 80px 20px 20px;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav-links li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-nav-links a {
+            font-weight: 600;
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Hero Section Styles */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* About Section Styles */
+        .about {
+            background-color: var(--light-color);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .headmistress {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px 0;
+        }
+        
+        .headmistress-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .headmistress h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .headmistress p {
+            max-width: 600px;
+            font-style: italic;
+        }
+        
+        .about-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        
+        .feature-box {
+            flex: 0 0 calc(33.333% - 30px);
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-box h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+            font-size: 1.3rem;
+        }
+        
+        .feature-box p {
+            color: var(--secondary-color);
+        }
+        
+        .achievements {
+            margin-top: 50px;
+        }
+        
+        .achievement-images {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .achievement-img {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .achievement-img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Programs Section Styles */
+        .programs {
+            background-color: var(--white);
+        }
+        
+        .program-intro {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+        
+        .program-intro p {
+            font-size: 1.1rem;
+        }
+        
+        .program-levels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        
+        .program-level {
+            flex: 0 0 calc(50% - 20px);
+            margin-bottom: 40px;
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .program-level h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .program-level h4 {
+            color: var(--dark-color);
+            margin: 20px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .program-level p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .subjects-container {
+            margin-top: 40px;
+        }
+        
+        .subjects-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .subject {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .subject:hover {
+            background-color: #d62a7a;
+            transform: translateY(-3px);
+        }
+        
+        .combination {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .combination h4 {
+            color: var(--white);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Contact Section Styles */
+        .contact {
+            background-color: var(--light-color);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        
+        .contact-details {
+            flex: 0 0 45%;
+        }
+        
+        .contact-details h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .contact-text p {
+            margin-bottom: 5px;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 0 0 calc(25% - 30px);
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .newsletter-form input,
+        .newsletter-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        
+        .newsletter-form input::placeholder,
+        .newsletter-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .newsletter-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #d62a7a;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .feature-box {
+                flex: 0 0 calc(50% - 20px);
+            }
+            
+            .footer-column {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .feature-box {
+                flex: 0 0 100%;
+            }
+            
+            .program-level {
+                flex: 0 0 100%;
+            }
+            
+            .contact-details {
+                flex: 0 0 100%;
+                margin-bottom: 30px;
+            }
+            
+            .footer-column {
+                flex: 0 0 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .headmistress-img {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container">
+                <img src="D:\josiah\logo.jpeg" alt="Josiah Girl's Secondary School Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>JOSIAH GIRL'S SECONDARY SCHOOL</h1>
+                    <span>My Dream My Destiny</span>
+                </div>
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                        <li><a href="aboutus.html">About Us</a></li>
+                        <li><a href="admission.html">Admission</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="schoollife.html">School Life</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <ul class="mobile-nav-links">
+                
+                <li><a href="home.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="admission.html">Admission</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="schoollife.html">School Life</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+            
+            </ul>
+        </div>
+        
+        <div class="overlay"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>My Dream, My Destiny</h1>
+                <p>At Josiah Girl's Secondary School, we believe every girl deserves quality education that unlocks her full potential. Our nurturing environment fosters academic excellence, leadership skills, and personal growth to prepare young women for success in all aspects of life.</p>
+                <div class="hero-buttons">
+                    <a href="admission.html" class="btn">Admission</a>
+                    <a href="academics.html" class="btn btn-outline">Academics</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section-padding" id="about">
+        <div class="container">
+            <h2 class="section-title">About Our School</h2>
+            
+            <div class="about-content">
+                <p>Josiah Girl's Secondary School is a premier single-sex institution for girls located in the beautiful region of Bukoba, Kagera, Tanzania, just 6 kilometers from Bukoba Municipal Town. We are dedicated to providing a safe, supportive environment where young women can thrive academically, socially, and personally.</p>
+                <p>Our comprehensive approach to education ensures that every student not only achieves excellent examination results but also develops strong character, positive social behaviors, and essential life skills that will serve them well beyond their school years.</p>
+            </div>
+            
+            <div class="headmistress">
+                <img src="D:\josiah\hm.jpeg" alt="Hon. Madam Headmistress" class="headmistress-img">
+                <h3>Hon. Madam Headmistress</h3>
+                <p>"At Josiah Girls, we don't just teach subjects - we shape futures. Our mission is to cultivate confident, capable young women who will become leaders in their communities and role models for generations to come. Education is the foundation upon which we build empowered women who will transform our society."</p>
+            </div>
+            
+            <div class="about-features">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Dedicated Faculty</h3>
+                    <p>Our school takes pride in its team of highly qualified, passionate teachers who are committed to each student's success. With small class sizes and personalized attention, our educators go beyond teaching to mentor and inspire every girl to reach her highest potential.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Comprehensive Curriculum</h3>
+                    <p>We follow the NECTA syllabuses while enriching our program with additional courses that develop critical thinking, creativity, and practical skills. This balanced approach ensures our students receive a well-rounded education that prepares them for both academic and life success.</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Holistic Development</h3>
+                    <p>Our educational philosophy recognizes that true success encompasses more than academic achievement. We nurture the complete individual, fostering social skills, emotional intelligence, and ethical values that create well-rounded young women ready to make meaningful contributions to society.</p>
+                </div>
+            </div>
+            
+            <div class="achievements">
+                <h3 class="text-center" style="margin-bottom: 30px; color: var(--primary-color);">Our Achievements & Awards</h3>
+                <p class="text-center">Josiah Girl's Secondary School has consistently ranked among Tanzania's top-performing girls' schools. Our commitment to excellence has been recognized through numerous awards and accolades celebrating our students' outstanding academic achievements and all-around development.</p>
+                
+                <div class="achievement-images">
+                    <img src="D:\josiah\award.jpeg" alt="Academic Award Ceremony" class="achievement-img">
+                    <img src="D:\josiah\staff.jpeg" alt="Students Receiving Honors" class="achievement-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs section-padding" id="programs">
+        <div class="container">
+            <h2 class="section-title">Our Educational Programmes</h2>
+            
+            <div class="program-intro">
+                <p>Josiah Girl's Secondary School offers a structured, progressive educational program designed specifically for young women. Our curriculum combines academic rigor with practical skill development, ensuring our students are well-prepared for higher education and professional careers.</p>
+            </div>
+            
+            <div class="program-levels">
+                <div class="program-level">
+                    <h3>Ordinary Level (O-Level)</h3>
+                    <p>Our four-year O-Level program builds a strong academic foundation while developing critical thinking and problem-solving skills essential for success in advanced studies and beyond.</p>
+                    
+                    <h4>Form One & Form Two</h4>
+                    <p>The first two years focus on establishing core competencies across all subjects. Students explore various disciplines to identify their strengths and interests while developing essential study habits and learning strategies. Our supportive environment helps girls transition smoothly into secondary education.</p>
+                    
+                    <h4>Form Three & Form Four</h4>
+                    <p>In the final O-Level years, students deepen their subject knowledge while preparing for national examinations. We provide intensive coaching, regular assessments, and personalized support to ensure each girl performs to her fullest potential. Our comprehensive preparation gives students confidence to excel in their exams.</p>
+                </div>
+                
+                <div class="program-level">
+                    <h3>Advanced Level (A-Level)</h3>
+                    <p>Our two-year A-Level program offers specialized combinations that prepare students for university education and professional careers. We provide advanced resources, research opportunities, and mentorship to help students excel in their chosen fields.</p>
+                    
+                    <h4>Form Five & Form Six</h4>
+                    <p>These crucial years represent the pinnacle of secondary education. Students engage in in-depth study of their chosen subjects, developing advanced analytical skills and subject mastery. Our expert faculty provides guidance for university preparation and career planning, ensuring each student is ready for her next academic challenge.</p>
+                </div>
+            </div>
+            
+            <div class="subjects-container">
+                <div class="program-levels">
+                    <div class="program-level">
+                        <h3>Core Subjects (O-Level)</h3>
+                        <p>All students from Form One to Form Four study these essential subjects:</p>
+                        
+                        <div class="subjects-list">
+                            <span class="subject">Mathematics</span>
+                            <span class="subject">English</span>
+                            <span class="subject">Kiswahili</span>
+                            <span class="subject">Biology</span>
+                            <span class="subject">Civics</span>
+                            <span class="subject">Physics</span>
+                            <span class="subject">Chemistry</span>
+                            <span class="subject">Geography</span>
+                            <span class="subject">History</span>
+                        </div>
+                    </div>
+                    
+                    <div class="program-level">
+                        <h3>A-Level Combinations</h3>
+                        <p>Students can choose from these specialized subject combinations:</p>
+                        
+                        <div class="combination">
+                            <h4>PCM (Physics, Chemistry, Mathematics)</h4>
+                            <p>Ideal for students pursuing engineering, physics, or mathematics at university level.</p>
+                        </div>
+                        
+                        <div class="combination">
+                            <h4>PCB (Physics, Chemistry, Biology)</h4>
+                            <p>Perfect for future doctors, pharmacists, and other medical professionals.</p>
+                        </div>
+                        
+                        <div class="combination">
+                            <h4>PGM ,CBG  (Physics, Geography, Mathematics) (chemistry, biology ,mathematics)</h4>
+                            <p>Excellent preparation for careers in environmental science, geology, or architecture.</p>
+                        </div>
+                        
+                        <div class="combination">
+                            <h4>HGL ,HGK,HGE,HKL,(History,English, Geography, Language)</h4>
+                            <p>For students interested in law, international relations, or social sciences.</p>
+                        </div>
+                        
+                        <div class="combination">
+                            <h4>ECA EGM,(Economics, Commerce, Accounting,Geography,Mathematics)</h4>
+                            <p>Prepares students for business, finance, and economics degrees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section-padding" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-info">
+                <div class="contact-details">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p>+255 753 739 321</p>
+                            <p>+255 614 569 321</p>
+                            <p>+255 756 083 379</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>josiahgirlshighschool@yahooh.com</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <p>P.O. Box 1605</p>
+                            <p>Bukoba, Kagera</p>
+                            <p>Tanzania</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-details">
+                    <h3>Admission Process</h3>
+                    <p>We welcome applications from motivated young women committed to academic excellence and personal growth. Our admission process identifies students who will thrive in our nurturing yet challenging environment.</p>
+                    <p>For information about requirements, deadlines, and fees, please contact our administration office using the details provided or visit us at our campus in Bukoba.</p>
+                    <a href="admission.html" class="btn" style="margin-top: 20px; display: inline-block;">Download Application Form</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column footer-about">
+                    <h3>About Josiah Girls</h3>
+                    <p>Josiah Girl's Secondary School is a center of excellence in girls' education, dedicated to nurturing intelligent, confident, and morally upright young women who will become leaders in their communities and beyond.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Programs</h3>
+                    <ul class="footer-links">
+                        <li><a href="admission.html">Form One</a></li>
+                        <li><a href="admission.html">Form Two</a></li>
+                        <li><a href="admission.html">Form Three</a></li>
+                        <li><a href="admission.html">Form Four</a></li>
+                        <li><a href="admission.html">Form Five</a></li>
+                        <li><a href="admission.html">Form Six</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="admission.html">Admission</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="schoollife.html">School Life</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <textarea placeholder="Your Message" rows="3"></textarea>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Josiah Girl's Secondary School. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-nav-links a');
+        
+        // Toggle mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+        
+        // Close mobile menu when clicking overlay or links
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        overlay.addEventListener('click', closeMobileMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-box, .program-level, .achievement-img');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state for animated elements
+        document.querySelectorAll('.feature-box, .program-level, .achievement-img').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
